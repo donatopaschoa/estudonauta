@@ -10,3 +10,36 @@ div#corpo {
 	background-color: #fff;
 	box-shadow: 0px 0px 30px #777;
 }
+
+table.listagem {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse; /* tirando espaço das linhas e col das bordas da tabela */
+}
+
+table.listagem tr {
+	height: 50px;
+}
+
+table.listagem td {
+	/* border: 1px solid #ddd; */
+	padding: 10px;
+}
+
+/* Efeito Zebrado: --
+A pseudo-classe nth-child() vai permitir selecionar as linhas (tr) pares (even) */
+table.listagem tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+/* Coluna para fotos:
+configurando a largura da primeira (1) coluna (td) */
+table.listagem td:nth-child(1) { 
+	width: 50px;
+}
+
+/* Última coluna:
+configurando a largura da última (3) coluna (td) */
+table.listagem td:nth-child(3) { 
+	width: 90px;
+}

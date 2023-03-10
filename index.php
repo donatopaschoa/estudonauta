@@ -7,7 +7,13 @@
 </head>
 <body>
 	<div id="corpo">
-		<h1>Olá</h1>
+		<h1>Escolha o seu jogo</h1>
+		<table class="listagem">
+			<tr><td>Foto</td><td>Nome</td><td>Adm</td></tr>
+			<tr><td>Foto</td><td>Nome</td><td>Adm</td></tr>
+			<tr><td>Foto</td><td>Nome</td><td>Adm</td></tr>
+			<tr><td>Foto</td><td>Nome</td><td>Adm</td></tr>
+		</table>
 	</div>
 </body>
 </html>
