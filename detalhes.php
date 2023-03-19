@@ -18,7 +18,7 @@
         <table class='detalhes'>
             <tr><td rowspan='3'>Foto
                 <td>Nome do jogo
-                <tr><td>Descição
+                <tr><td>Descrição
                 <tr><td>Adm
         </table>
 	</div>
