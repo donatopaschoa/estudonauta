@@ -46,9 +46,10 @@ table.listagem td:nth-child(3) {
 
 
 table.detalhes {
-	width: 100%;
+	width: 90%;
 }
 
 img.mini {
 	width: 50px;
+
 }
