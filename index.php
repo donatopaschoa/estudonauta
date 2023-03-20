@@ -14,8 +14,11 @@
 		<h1>Escolha o seu jogo</h1>
 		<table class="listagem">
 			<?php
-				$busca = $banco->query("select * from jogos order by nome"); // >> banco.php
+				$q = "select j.cod, j.nome, g.genero, p.produtora, j.capa ";
+				$q = $q . "from jogos j join generos g on j.genero = g.cod ";
+				$q = $q . "join produtoras p on j.produtora = p.cod";
 
+				$busca = $banco->query($q); // >> banco.php
 				if(!$busca){
 					echo "<tr><td> Infelismente a busca deu errado!";
 				}else{
@@ -26,6 +29,7 @@
 							$t = thump($reg->capa); // mét. q verf. se o arq. existe >> funcoes.php
 							echo "<tr><td><img src='$t' class='mini'>";
 							echo "<td><a href='detalhes.php?cod=$reg->cod'>$reg->nome</a>";
+							echo " [$reg->genero] <br> $reg->produtora";
 							echo "<td>Adm";
 						}
 					}
