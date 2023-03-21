@@ -12,6 +12,8 @@
     ?>
 	<div id="corpo">
         <?php
+            include_once "topo.php"; // link "Entrar" p/ adm ou editores
+            
             $c = $_GET['cod'] ?? 0; // Somente após V7, se OK >> "$c = $_GET['cod']", senão, "$c = 0"
             $busca = $banco->query("select * from jogos where cod = $c");
         ?>
@@ -37,5 +39,6 @@
         </table>
         <a href="index.php"><img src="icones/icoback.png" alt="Voltar"></a>
 	</div>
+    <?php include_once "rodape.php"; // rodapé com fechamento do banco de dados ?>
 </body>
 </html>

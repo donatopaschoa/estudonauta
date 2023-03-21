@@ -11,7 +11,14 @@
 		require_once "includes/funcoes.php";
 	?>
 	<div id="corpo">
+		<?php include_once "topo.php"; // link "Entrar" p/ adm ou editores ?>
 		<h1>Escolha o seu jogo</h1>
+
+		<form action="index.php" id="busca" method="get">
+			Ordenar: Nome | Produtora | Nota alta | Nota baixa | 
+			Buscar: <input type="text" name="c" size="10" maxlength="40"/> <input type="submit" value="OK"/>
+		</form>
+
 		<table class="listagem">
 			<?php
 				$q = "select j.cod, j.nome, g.genero, p.produtora, j.capa ";
@@ -29,7 +36,7 @@
 							$t = thump($reg->capa); // mét. q verf. se o arq. existe >> funcoes.php
 							echo "<tr><td><img src='$t' class='mini'>";
 							echo "<td><a href='detalhes.php?cod=$reg->cod'>$reg->nome</a>";
-							echo " [$reg->genero] <br> $reg->produtora";
+							echo " [$reg->genero] <br> $reg->produtora"; 
 							echo "<td>Adm";
 						}
 					}
@@ -37,6 +44,6 @@
 			?>
 		</table>
 	</div>
-	<?php $banco->close(); ?>
+	<?php include_once "rodape.php"; // rodapé com fechamento do banco de dados ?>
 </body>
 </html>
