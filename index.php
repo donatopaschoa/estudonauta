@@ -19,11 +19,11 @@
 		<form action="index.php" id="busca" method="get">
 
 			Ordenar: 
-			<a href="index.php?o=n">Nome</a> | 
-			<a href="index.php?o=p">Produtora</a> | 
-			<a href="index.php?o=n1">Nota alta</a> | 
-			<a href="index.php?o=n2">Nota baixa</a> | 
-			<a href="index.php?o=g">Gênero</a> |
+			<a href="index.php?o=n&c=<?php echo $chave;?>">Nome</a> | 
+			<a href="index.php?o=p&c=<?php echo $chave;?>">Produtora</a> | 
+			<a href="index.php?o=n1&c=<?php echo $chave;?>">Nota alta</a> | 
+			<a href="index.php?o=n2&c=<?php echo $chave;?>">Nota baixa</a> | 
+			<a href="index.php?o=g&c=<?php echo $chave;?>">Gênero</a> |
 			<a href="index.php">Mostrar Todos</a> |
 
 			Buscar: <input type="text" name="c" size="10" maxlength="40"/> <input type="submit" value="OK"/>

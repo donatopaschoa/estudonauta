@@ -3,7 +3,7 @@
     //(verif. se poderá impactar nas variáveis de seção por ex.)
     //header("Cache-Control: no-cache"); 
     
-    header("Cache-Control: no-cache"); // Ok, funcionou, não necessitou fechar e abrir o browser
+    header("Cache-Control: no-cache"); // Ok, funcionou, não necessitou fechar e abrir o
     echo "<header>"; // cabeçalho das páginas
     echo "Entrar";
     echo "<header>";
