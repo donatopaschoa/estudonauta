@@ -9,21 +9,60 @@
 	<?php
 		require_once "includes/banco.php";		// conexão c/ bco de dados
 		require_once "includes/funcoes.php";
+		$ordem = $_GET['o'] ?? 'n'; // n = ordenação por nome
+		$chave = $_GET["c"] ?? ""; // c = campo de "Busca" da caixa de texto
 	?>
 	<div id="corpo">
 		<?php include_once "topo.php"; // link "Entrar" p/ adm ou editores ?>
 		<h1>Escolha o seu jogo</h1>
 
 		<form action="index.php" id="busca" method="get">
-			Ordenar: Nome | Produtora | Nota alta | Nota baixa | 
+
+			Ordenar: 
+			<a href="index.php?o=n">Nome</a> | 
+			<a href="index.php?o=p">Produtora</a> | 
+			<a href="index.php?o=n1">Nota alta</a> | 
+			<a href="index.php?o=n2">Nota baixa</a> | 
+			<a href="index.php?o=g">Gênero</a> |
+			<a href="index.php">Mostrar Todos</a> |
+
 			Buscar: <input type="text" name="c" size="10" maxlength="40"/> <input type="submit" value="OK"/>
 		</form>
 
 		<table class="listagem">
 			<?php
-				$q = "select j.cod, j.nome, g.genero, p.produtora, j.capa ";
-				$q = $q . "from jogos j join generos g on j.genero = g.cod ";
-				$q = $q . "join produtoras p on j.produtora = p.cod";
+				$q = "select j.cod, j.nota, j.nome, g.genero, p.produtora, j.capa ";
+				$q .= "from jogos j join generos g on j.genero = g.cod ";
+				$q .= "join produtoras p on j.produtora = p.cod ";
+
+				if( !empty($chave) ) { // se a campo NÃO estiver vazio:
+					$q .= " where j.nome like '%$chave%' ";
+					$q .= " or j.nota like '%$chave%' ";
+					$q .= " or g.genero like '%$chave%' ";
+					$q .= " or p.produtora like '%$chave%' ";
+				}
+
+				switch($ordem){
+					
+					case "p":
+						$q .= " order by p.produtora";
+						break;
+
+					case "n1":
+						$q .= " order by j.nota desc";
+						break;
+
+					case "n2":
+						$q .= " order by j.nota asc";
+						break;
+
+					case "g":
+						$q .= " order by g.genero";
+						break;
+
+					default:
+						$q .= " order by j.nome"; // outras opções, será ordenado por nome 
+				}
 
 				$busca = $banco->query($q); // >> banco.php
 				if(!$busca){
@@ -36,7 +75,7 @@
 							$t = thump($reg->capa); // mét. q verf. se o arq. existe >> funcoes.php
 							echo "<tr><td><img src='$t' class='mini'>";
 							echo "<td><a href='detalhes.php?cod=$reg->cod'>$reg->nome</a>";
-							echo " [$reg->genero] <br> $reg->produtora"; 
+							echo " [$reg->genero] <br> $reg->produtora - nota " . number_format($reg->nota, 1); 
 							echo "<td>Adm";
 						}
 					}
