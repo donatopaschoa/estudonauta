@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<title> Título da Página</title>
+	<title>Listagem de jogos</title>
 	<meta charset="UTF-8"/>
 	<link rel="stylesheet" href="estilos/estilo.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 	<?php
@@ -15,6 +16,10 @@
 	<div id="corpo">
 		<?php include_once "topo.php"; // link "Entrar" p/ adm ou editores ?>
 		<h1>Escolha o seu jogo</h1>
+
+		<div class='sucesso'><span class='material-icons'>check_circle</span> Arquivo aberto com sucesso </div>
+
+		<?php //echo msg_sucesso('Arquivo aberto com sucesso!'); // ?>
 
 		<form action="index.php" id="busca" method="get">
 

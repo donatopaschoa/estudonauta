@@ -1,81 +1,99 @@
-body {
+
+* {			    /* Necessário para alinhar os textos p/ a esquerda conf. visualização do site do prof. */
+	text-align: left;
+}
+
+	body {
 	background-color: #ddd;
 	font-family: Tahoma;
 }
 
-header {
-	text-align: right;
+	header {			/* este seletor tem o mesmo objetivo q o seletor "pequeno" do .css do prof */
+	text-align: right;  /* no nosso site, é usado na tag <header> do arq. "topo.php" */
 	font-size:  10px;
 }
 
-div#corpo {
+	div#corpo {
 	width: 800px;
+	height: 100%; /* Alterado conf. o cód. do prof */
 	margin:auto;
 	padding: 20px;
 	background-color: #fff;
 	box-shadow: 0px 0px 30px #777;
 }
 
-form#busca {
+	form#busca {  /* este seletor tem o mesmo objetivo q o seletor "pequeno" do .css do prof */
 	font-size: 11px;
 	text-align: right;
 }
 
-table.listagem {
+	table.listagem {
 	width: 100%;
 	text-align: left;
 	border-collapse: collapse; /* tirando espaço das linhas e col das bordas da tabela */
 }
 
-table.listagem tr {
+	table.listagem tr {
 	height: 50px;
 }
 
-table.listagem td {
+	table.listagem td {
 	/* border: 1px solid #ddd; */
-	padding: 10px;
+	padding: 5px; 	/* estava c/ 10px mas alterei conforme o arq. do prof (visualização) */
 }
 
 /* Efeito Zebrado: --
 A pseudo-classe nth-child() vai permitir selecionar as linhas (tr) pares (even) */
-table.listagem tr:nth-child(even) {
+	table.listagem tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 
 /* Coluna para fotos:
 configurando a largura da primeira (1) coluna (td) */
-table.listagem td:nth-child(1) { 
+	table.listagem td:nth-child(1) { 
 	width: 50px;
+	text-align: center; /* Foi adicionado conf. arq do prof (visualização */
 }
 
 /* Ultima coluna:
 configurando a largura da última (3) coluna (td) */
-table.listagem td:nth-child(3) { 
+	table.listagem td:nth-child(3) { 
 	width: 90px;
+	text-align: right; /* Foi adicionado conf. arq do prof (visualização */
 }
 
 
-table.detalhes {
+/*
+	table.detalhes {	      Foi removido p/ se adequar conf. arq. do prof
 	width: 100%;
 }
+*/
 
-table.detalhes td {
+	table.detalhes td {
 	padding: 10px;
 	vertical-align: top;
 	/* order: solid 3px black; teste*/
 }
 
-img.mini {
+	img.mini {
 	width: 50px;
 
 }
 
-img.full {
+div.sucesso {
+	padding: 7px 15px;
+	margin-bottom: 15px;
+	border-radius: 15px;
+	background-color: rgb(226, 239, 218);
+	color: rgb(74, 116, 67);
+}
+
+	img.full {	  /* este seletor tem o mesmo objetivo q o seletor "grande" do .css do prof - detalhes.php*/
 	height: 400px;
 }
 
-footer {
+	footer {	  /* O conteúdo deste seletor está dentro do arq "rodape.php" do prof (ele escreveu manualmente) */
 	text-align: center;
-	font-family: Arial, Helvetica, sans-serif;
+	/* font-family: Arial, Helvetica, sans-serif;   Foi removido p/ se adequar conf. arq. do prof */
 	font-size: 10px;
 }
