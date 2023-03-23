@@ -9,4 +9,8 @@
             return $caminho;
         }
     }
+
+    function iconeVoltar(){
+        return "<a href='index.php'><span class='material-icons'>arrow_back</span></a>";
+    }
 ?>

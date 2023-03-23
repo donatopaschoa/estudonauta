@@ -4,6 +4,7 @@
 	<title> Título da Página</title>
 	<meta charset="UTF-8"/>
 	<link rel="stylesheet" href="estilos/estilo.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -13,7 +14,7 @@
 	<div id="corpo">
         <?php
             include_once "topo.php"; // link "Entrar" p/ adm ou editores
-            
+
             $c = $_GET['cod'] ?? 0; // Somente após V7, se OK >> "$c = $_GET['cod']", senão, "$c = 0"
             $busca = $banco->query("select * from jogos where cod = $c");
         ?>
@@ -37,7 +38,7 @@
                 }
             ?>
         </table>
-        <a href="index.php"><img src="icones/icoback.png" alt="Voltar"></a>
+        <?php echo iconeVoltar();  // ícone do Google  ?>
 	</div>
     <?php include_once "rodape.php"; // rodapé com fechamento do banco de dados ?>
 </body>
