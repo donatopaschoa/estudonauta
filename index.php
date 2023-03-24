@@ -17,9 +17,13 @@
 		<?php include_once "topo.php"; // link "Entrar" p/ adm ou editores ?>
 		<h1>Escolha o seu jogo</h1>
 
-		<div class='sucesso'><span class='material-icons'>check_circle</span> Arquivo aberto com sucesso </div>
+		<?php 
+			echo msg_sucesso('Arquivo aberto com sucesso'); 
+			echo msg_aviso('Você esqueceu de colocar o nome');
+			echo msg_erro('Falha no cadastro do jogo');
+		?>
 
-		<?php //echo msg_sucesso('Arquivo aberto com sucesso!'); // ?>
+
 
 		<form action="index.php" id="busca" method="get">
 

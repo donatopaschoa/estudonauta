@@ -80,14 +80,6 @@ configurando a largura da última (3) coluna (td) */
 
 }
 
-div.sucesso {
-	padding: 7px 15px;
-	margin-bottom: 15px;
-	border-radius: 15px;
-	background-color: rgb(226, 239, 218);
-	color: rgb(74, 116, 67);
-}
-
 	img.full {	  /* este seletor tem o mesmo objetivo q o seletor "grande" do .css do prof - detalhes.php*/
 	height: 400px;
 }
@@ -96,4 +88,28 @@ div.sucesso {
 	text-align: center;
 	/* font-family: Arial, Helvetica, sans-serif;   Foi removido p/ se adequar conf. arq. do prof */
 	font-size: 10px;
+}
+
+div.sucesso {
+	padding: 7px 15px;
+	margin-bottom: 15px;
+	border-radius: 15px;
+	background-color: rgb(226, 239, 218);
+	color: rgb(74, 116, 67);
+}
+
+div.aviso {
+	padding: 7px 15px;
+	margin-bottom: 15px;
+	border-radius: 15px;
+	background-color: rgb(251, 248, 229);
+	color: rgb(134, 110, 66);
+}
+
+div.erro {
+	padding: 7px 15px;
+	margin-bottom: 15px;
+	border-radius: 15px;
+	background-color: rgb(239, 233, 222);
+	color: rgb(157, 75, 69);
 }
