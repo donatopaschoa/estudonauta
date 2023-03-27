@@ -9,6 +9,7 @@
 <body>
 	<?php
 		require_once "includes/banco.php";		// conexão c/ bco de dados
+		require_once "includes/login.php";
 		require_once "includes/funcoes.php";
 		$ordem = $_GET['o'] ?? 'n'; // n = ordenação por nome
 		$chave = $_GET["c"] ?? ""; // c = campo de "Busca" da caixa de texto
@@ -16,14 +17,6 @@
 	<div id="corpo">
 		<?php include_once "topo.php"; // link "Entrar" p/ adm ou editores ?>
 		<h1>Escolha o seu jogo</h1>
-
-		<?php 
-			echo msg_sucesso('Arquivo aberto com sucesso'); 
-			echo msg_aviso('Você esqueceu de colocar o nome');
-			echo msg_erro('Falha no cadastro do jogo');
-		?>
-
-
 
 		<form action="index.php" id="busca" method="get">
 

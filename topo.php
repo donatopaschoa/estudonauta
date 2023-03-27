@@ -3,8 +3,15 @@
     //(verif. se poderá impactar nas variáveis de seção por ex.)
     //header("Cache-Control: no-cache"); 
     
-    header("Cache-Control: no-cache"); // Ok, funcionou, não necessitou fechar e abrir o
     echo "<header>"; // cabeçalho das páginas
-    echo "Entrar";
-    echo "<header>";
+
+    // se a variável de sessão estiver vazia:
+    if( empty($_SESSION['user']) ) {
+        echo "<a href='user-login.php'>Entrar</a>";
+    }else{
+        echo "Olá, <strong>". $_SESSION['nome'] ."</strong> | ";
+        echo "<a href='user-logout.php' >Sair</a>";
+    }
+
+    echo "</header>";
 ?>
