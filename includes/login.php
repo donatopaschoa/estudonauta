@@ -3,9 +3,9 @@
         /*
         // teste: forçando esvaziamento das variáveis
         // de sessão pois elas acabam ficando (os valores persistem)
-        $_SESSION['user'] = "";
-        $_SESSION['nome'] = "";
-        $_SESSION['tipo'] = "";
+        unset($_SESSION['user']);
+        unset($_SESSION['nome']);
+        unset($_SESSION['tipo']);
         */
 
         /*
@@ -42,6 +42,13 @@ function gerarHash($senha){
 function testarHash($senha, $hash){
     $tst = password_verify($senha, $hash);
     return $tst;
+}
+
+function logout(){
+    // apagando as variáveis de sessão:
+    unset($_SESSION['user']);
+    unset($_SESSION['nome']);
+    unset($_SESSION['tipo']);
 }
 
 /*
