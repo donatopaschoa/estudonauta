@@ -30,7 +30,21 @@
                         $t = thump($reg->capa); // Verif. e retorna o caminho completo do arq. "funcoes.php"
                         echo "<tr><td rowspan='3'><img src='$t' class='full'>";
                         echo "<td><h2>$reg->nome</h2>";
-                        echo "Nota: ". number_format($reg->nota, 1) ."/10";
+                        echo "Nota: ". number_format($reg->nota, 1) ."/10 ";
+
+                        if(is_admin()){
+                            // ìcone "+":
+                            echo "<span class='material-icons'>check_circle</span>";
+                            // ícone "editar" (caneta):
+                            echo "<span class='material-icons'>edit</span>";
+                            // ícone "excluir" (lixeira):
+                            echo "<span class='material-icons'>delete</span>";
+
+                        }elseif(is_editor()){
+                            // ícone "editar" (caneta):
+                            echo "<span class='material-icons'>edit</span>";
+                        }
+
                         echo "<tr><td>$reg->descricao";
                         echo "<tr><td>Adm";
                     }else{

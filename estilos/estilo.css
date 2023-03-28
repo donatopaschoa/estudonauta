@@ -38,14 +38,15 @@
 }
 
 	table.listagem td {
-	/* border: 1px solid #ddd; */
+	/* border: 1px solid black; */
 	padding: 5px; 	/* estava c/ 10px mas alterei conforme o arq. do prof (visualização) */
 }
 
 /* Efeito Zebrado: --
 A pseudo-classe nth-child() vai permitir selecionar as linhas (tr) pares (even) */
 	table.listagem tr:nth-child(even) {
-	background-color: #f2f2f2;
+	/* background-color: #f2f2f2;  // prof */
+	background-color: #bfb8b8;
 }
 
 /* Coluna para fotos:

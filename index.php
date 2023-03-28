@@ -78,7 +78,20 @@
 							echo "<tr><td><img src='$t' class='mini'>";
 							echo "<td><a href='detalhes.php?cod=$reg->cod'>$reg->nome</a>";
 							echo " [$reg->genero] <br> $reg->produtora - nota " . number_format($reg->nota, 1); 
-							echo "<td>Adm";
+							if(is_admin()){
+								echo "<td>";
+								// ìcone "+":
+								echo "<span class='material-icons'>check_circle</span>";
+								// ícone "editar" (caneta):
+								echo "<span class='material-icons'>edit</span>";
+								// ícone "excluir" (lixeira):
+								echo "<span class='material-icons'>delete</span>";
+
+							}elseif(is_editor()){
+								echo "<td>";
+								// ícone "editar" (caneta):
+								echo "<span class='material-icons'>edit</span>";
+							}
 						}
 					}
 				}
