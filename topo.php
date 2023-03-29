@@ -9,7 +9,7 @@
         echo "Meus Dados | ";
 
         if(is_admin()){
-            echo "Novo usuário | ";
+            echo "<a href='user-new.php'> Novo usuário</a> | ";
             echo "Novo jogo | ";
         }
 

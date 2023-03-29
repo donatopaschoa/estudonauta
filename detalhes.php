@@ -46,7 +46,6 @@
                         }
 
                         echo "<tr><td>$reg->descricao";
-                        echo "<tr><td>Adm";
                     }else{
                         echo "<tr><td>Nenhum registro encontrado";
                     }
