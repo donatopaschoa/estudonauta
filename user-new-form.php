@@ -11,8 +11,8 @@
         <tr><td>Tipo: 
             <td>
             <select name="tipo" id="tipo">
-                <option value="admin">Administrador do Sistema</option>
-                <option value="editor">Editor Autorizado</option>
+            <option value="editor">Editor Autorizado</option>
+            <option value="admin">Administrador do Sistema</option>
             </select>
 
         <tr><td>Senha: 
