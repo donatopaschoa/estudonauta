@@ -6,7 +6,7 @@
         echo "<a href='user-login.php'>Entrar</a>";
     }else{
         echo "Olá, <strong>". $_SESSION['nome'] ."</strong> (". $_SESSION['tipo'] .") | ";
-        echo "Meus Dados | ";
+        echo "<a href='user-edit.php'>Meus Dados</a> | ";
 
         if(is_admin()){
             echo "<a href='user-new.php'> Novo usuário</a> | ";
