@@ -25,16 +25,28 @@
                         // será montado o formulário:
                         require_once "user-new-form.php";
                     }else{
-                        // vc é admin. e há conf. de recebimento de parâmetro usuário, portanto, estes
-                        // parâmetros serão armazenados em variáveis 
-                        $usuario = $_POST['usuario'] ?? null;
-                        $nome = $_POST['nome'] ?? null;
-                        $senha1 = $_POST['senha1'] ?? null;
-                        $senha2 = $_POST['senha2'] ?? null;
-                        $tipo = $_POST['tipo'] ?? null;
+                    // vc é administrador e há configuração de recebimento do parâmetro
+                    // "usuario", portanto, todos os parâmetros serão armazenados em variáveis 
+                    $usuario = $_POST['usuario'] ?? null;
+                    $nome = $_POST['nome'] ?? null;
+                    $senha1 = $_POST['senha1'] ?? null;
+                    $senha2 = $_POST['senha2'] ?? null;
+                    $tipo = $_POST['tipo'] ?? null;
 
-                        if($senha1 === $senha2){
-                            echo msg_sucesso("Tudo certo para gravar");
+                    if($senha1 === $senha2){
+                        if(empty($usuario) || empty($nome) || empty($senha1) || empty($senha2) || empty($tipo)){
+                            echo msg_erro("Todos os dados são de preenchimentos obrigatórios!");
+                        }else{
+                            $senha = gerarHash($senha1);
+                            $q = "insert into usuarios (usuario, nome, senha, tipo) ";
+                            $q .= "values('$usuario', '$nome', '$senha', '$tipo') ";
+
+                            if($banco->query($q)){
+                                echo msg_sucesso("Usuário $usuario cadastrado com sucesso!");
+                            }else{
+                                echo msg_erro("Não foi possível cadastrar o usuário $usuario, tente usar outro usuário");
+                            }
+                        }
                         }else{
                             echo msg_erro("Senhas não conferem. Repita o processo");
                         }
