@@ -85,14 +85,6 @@ img.full {	  /* este seletor tem o mesmo objetivo q o seletor "grande" do .css d
 	height: 400px;
 }
 
-
-footer {	  /* O conteúdo deste seletor está dentro do arq "rodape.php" do prof (ele escreveu manualmente) */
-	text-align: center;
-	/* font-family: Arial, Helvetica, sans-serif;   Foi removido p/ se adequar conf. arq. do prof */
-	font-size: 10px;
-} 
-
-
 div.sucesso {
 	padding: 7px 15px;
 	margin-bottom: 15px;
