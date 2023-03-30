@@ -28,7 +28,7 @@
         $c = '';
 
         for($i=0; $i<strlen($senha); $i++ ){
-            $letra = ord($senha[$i]) + 1;   // retorna o caractere numérico da tab. ascii da letra
+            $letra = ord($senha[$i]) + 1;   // retorna o caractere numérico +1 da tab. ascii da letra
             $c .= chr($letra);               // faz o contrário
         }
         return $c;
@@ -40,7 +40,7 @@ function gerarHash($senha){
 }
 
 function testarHash($senha, $hash){
-    $tst = password_verify($senha, $hash);
+    $tst = password_verify(cripto($senha), $hash);
     return $tst;
 }
 
@@ -89,26 +89,14 @@ function is_editor(){
         }
     }
 }
-
-
-
-
-
-/*
-    $original = '123';
-    echo "Original = " .$original; // 123
-    echo '<br>';
-    echo "criptografado = ". cripto($original); // 234
+    /*
+    echo gerarHash('teste');
     echo "<br>";
-    echo "Hash = " . gerarHash($original); // na vdd a hash foi gerada pela senha '234' pois foi cryptografada internamente 
+    echo cripto('teste');
     echo "<br>";
-    echo "teste c/ o original: ";
-    echo testarHash('123', '$2y$10$nt6.P/uSDJLgS2a/hjk1LOeBfTpWBVDSWLBGtqIMAcuPip7q2UwXK') ? 'ok': 'Não ok'; // Não ok
-    echo '<br>';
-    echo "teste c/ o criptografado: ";
-    echo testarHash('234', '$2y$10$nt6.P/uSDJLgS2a/hjk1LOeBfTpWBVDSWLBGtqIMAcuPip7q2UwXK') ? 'ok': 'Não ok'; // ok
-*/
-    
-    
+    echo testarHash('teste','$2y$10$3g06dvSSDd85E0f/hQOB6eS.TOOWqD.wJ7Z7dFmr2wZD.JaVHktY6') ? 'ok' : 'Não OK';
+    echo "<br>";
+    echo password_verify('uftuf','$2y$10$3g06dvSSDd85E0f/hQOB6eS.TOOWqD.wJ7Z7dFmr2wZD.JaVHktY6');
+    */
 
 ?>
