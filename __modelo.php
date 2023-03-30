@@ -16,5 +16,6 @@
     <body>
         <div id="corpo">
         </div>
+        <?php require_once "rodape.php"; ?>
     </body>
 </html>
