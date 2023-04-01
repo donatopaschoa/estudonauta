@@ -1,8 +1,4 @@
 
-* {			    /* Necessário para alinhar os textos p/ a esquerda conf. visualização do site do prof. */
-	text-align: left;
-}
-
 body {
 	background-color: #ddd;
 	font-family: Tahoma;
@@ -11,6 +7,12 @@ body {
 header {			/* este seletor tem o mesmo objetivo q o seletor "pequeno" do .css do prof */
 	text-align: right;  /* no nosso site, é usado na tag <header> do arq. "topo.php" */
 	font-size:  10px;
+}
+
+footer {	  /* O conteúdo deste seletor está dentro do arq "rodape.php" do prof (ele escreveu manualmente) */
+	text-align: center;
+	/* font-family: Arial, Helvetica, sans-serif;   Foi removido p/ se adequar conf. arq. do prof */
+	font-size: 10px;
 }
 
 div#corpo {
