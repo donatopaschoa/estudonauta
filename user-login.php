@@ -35,7 +35,7 @@
                     require "user-login-form.php";
                 // consultando:
                 }else{
-                    $q = "select usuario, nome, senha, tipo from usuarios ";
+                    $q = "select usuario, nome, senha, dtSenha, tipo from usuarios ";
                     $q .= " where usuario = '$u' LIMIT 1";
                     $busca = $banco->query($q);
                     if(!$busca){ // erro de conexão c/ bco d dados:
@@ -45,14 +45,20 @@
                         if($busca->num_rows > 0){                        
                             // transferindo os dados de um obj p/ outro
                             $reg = $busca->fetch_object();
-                            // Se a senha conferir, populará variáveis de sessão:
+                            // Se a senha conferir, será analisada se expirou:
                             if(testarHash($s, $reg->senha)){
+                                if(qtdeTempo($reg->dtSenha, "ano") >= 1){ // teste de senha expirada
+                                    echo msg_aviso("Sua senha expirou, <a href='user-edit.php'>clique aqui</a> para alterar");
+                                    $_SESSION['senhaExpirada'] = true;
+                                }else{
+                                    $_SESSION['senhaExpirada'] = false;
+                                }
                                 echo msg_sucesso("Logado com sucesso");
+                                // Populando as variáveis de sessão:
                                 $_SESSION['user'] = $reg->usuario;
                                 $_SESSION['nome'] = $reg->nome;
                                 $_SESSION['tipo'] = $reg->tipo;
-                            // senha não confere:
-                            }else{
+                            }else{ // senha não confere:
                                 echo msg_erro("Senha inválida");
                             }
                         // se não tiver registro:
@@ -61,7 +67,7 @@
                         }
                     }
                 }
-                echo iconeVoltar();
+                    echo iconeVoltar();
             ?>
         </div>
         <?php require_once "rodape.php"; ?>
