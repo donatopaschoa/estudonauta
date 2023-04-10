@@ -19,7 +19,11 @@
                 // se você não tiver logado como administrador:
                 if(!is_admin()){
                     echo msg_erro("Área restrita! Você não é administrdor");
-                }else{
+                // Se um administrador c/a senha vencida tentar cadastrar diretamente:
+                }elseif($_SESSION['senhaExpirada'] == true){
+                    echo msg_erro("Favor alterar sua senha pois está expirada! <a href='user-edit.php'>Clique aqui</a>");
+                }
+                else{
                     // se vc for administrador e não foi configurado o envio do parâmetro "usuario" via post:
                     if(!isset($_POST['usuario'])){
                         // será montado o formulário:
@@ -38,12 +42,13 @@
                             echo msg_erro("Todos os dados são de preenchimentos obrigatórios!");
                         }else{
                             $senha = gerarHash($senha1);
-                            $q = "insert into usuarios (usuario, nome, senha, tipo) ";
-                            $q .= "values('$usuario', '$nome', '$senha', '$tipo') ";
+                            $q = "insert into usuarios (usuario, nome, senha, tipo, dtStatus, dtSenha, atividade) ";
+                            $q .= "values('$usuario', '$nome', '$senha', '$tipo', now(), now(), '". historicoCadastro($_SESSION['user'], $_SESSION['nome'], $usuario, $nome, $senha, $tipo) ."') ";
 
                             if($banco->query($q)){
                                 echo msg_sucesso("Usuário $usuario cadastrado com sucesso!");
                             }else{
+                                print_r($q);
                                 echo msg_erro("Não foi possível cadastrar o usuário $usuario, tente usar outro usuário");
                             }
                         }
