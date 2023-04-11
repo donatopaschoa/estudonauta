@@ -71,4 +71,28 @@
 
         return $dados;
     }
+
+    function historicoEdicao($usuario, $nome, $senha, $tipo, $dtStatus, $dtSenha, $atividade){
+
+        $dados = "<hr>Dados cadastrados na base de $usuario: <br>";
+        $dados .= "Usuário: $usuario<br>";
+        $dados .= "Nome: $nome<br>";
+        $dados .= "Senha: $senha <br>";
+        $dados .= "Tipo: $tipo <br>";
+        $dados .= "dtStatus: $dtStatus<br>";
+        $dados .= "dtSenha: $dtSenha<br>";
+        $dados .= "$atividade<br>";
+
+        return $dados;
+    }
+
+    function validaCampo(){
+    /*
+        4) Criar validações no preenchimento dos campos de cadastro e/ou edição:
+        4.1) Não permitir preenchimento de caracteres q possam causar problemas no banco de dados, ex, "aspas simples"
+        4.2) Não permitir que haja mais de um caractere "espaço" consecutivo no meio de uma palavra ou que tenha "espaço" no início e final
+    */
+    
+
+    }
 ?>

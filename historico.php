@@ -15,7 +15,11 @@
     </head>
     <body>
         <div id="corpo">
-        <h1>Histórico:</h1>
+            <table class="listagem">
+                <tr><td><h1>Histórico</h1><td><td><?php echo iconeVoltar(); ?>
+            </table>
+        
+        
             <?php
                 $q = "select atividade from usuarios where usuario = '". $_SESSION['user'] ."'";
                 

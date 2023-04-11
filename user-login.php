@@ -38,8 +38,8 @@
                     $q = "select usuario, nome, senha, dtSenha, tipo from usuarios ";
                     $q .= " where usuario = '$u' LIMIT 1";
                     $busca = $banco->query($q);
-                    if(!$busca){ // erro de conexão c/ bco d dados:
-                       echo msg_erro('Falha ao acessar o banco de dados');
+                    if(!$busca){ // erro de conexão c/ bco d dados: 
+                        echo msg_erro('Falha ao acessar o banco de dados');
                     }else{ 
                         // se encontrar algum registro:
                         if($busca->num_rows > 0){                        

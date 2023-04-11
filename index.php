@@ -81,7 +81,7 @@
 							if(is_admin()){
 								echo "<td>";
 								// ìcone "+":
-								echo "<span class='material-icons'>check_circle</span>";
+								echo "<span class='material-icons'>add_circle</span>";
 								// ícone "editar" (caneta):
 								echo "<span class='material-icons'>edit</span>";
 								// ícone "excluir" (lixeira):

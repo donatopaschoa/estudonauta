@@ -42,27 +42,10 @@
                         $qs = "select usuario, nome, senha, tipo, dtStatus, dtSenha, atividade from usuarios where usuario = '$usuario'";
                         $busca = $banco->query($qs);
                         $reg = $busca->fetch_object();
-                        
-                        // coletando dados antigos (antes de atualizar):
-                        $usuarioAntigo = $reg->usuario;
-                        $nomeAntigo = $reg->nome;
-                        $senhaAntigo = $reg->senha;
-                        $tipoAntigo = $reg->tipo;
-                        $dtStatusAntigo = $reg->dtStatus;
-                        $dtSenhaAntigo = $reg->dtSenha;
-                        $atividadeAntigo = $reg->atividade;
-                        
-                        $dados = "<hr>Dados cadastrados na base de $usuario: <br>";
-                        $dados .= "Usuário: $usuarioAntigo <br>";
-                        $dados .= "Nome: $nomeAntigo <br>";
-                        $dados .= "Senha: $senhaAntigo <br>";
-                        $dados .= "Tipo: $tipoAntigo <br>";
-                        $dados .= "dtStatus: $dtStatusAntigo <br>";
-                        $dados .= "dtSenha: $dtSenhaAntigo <br>";
-                        $dados .= "$atividadeAntigo <br>";
 
+                        $dados = historicoEdicao($reg->usuario, $reg->nome, $reg->senha, $reg->tipo, $reg->dtStatus, $reg->dtSenha, $reg->atividade);
 
-                        // salvando somente o nome e a senha (usuario e tipo não permite alteração):
+                        // alterando somente o nome e a senha (usuario e tipo não permite alteração):
                         $q = "update usuarios set ";
                         $q .= "nome = '$nome' ";
                         $q .= ", dtStatus = now() ";
@@ -80,7 +63,7 @@
                             // os campos das senhas foram preenchidos:
                             if($senha1 === $senha2){
                                 // implementação: consulta se a senha digitada é igual a antiga e atualiza a dtSenha:
-                                if(testarHash($senha1, $senhaAntigo)){
+                                if(testarHash($senha1, $reg->senha)){
                                     echo msg_erro("Favor digitar outra senha pois você está repetindo a senha antiga (fazer login pela senha antiga e recadastrar novamente)");
                                 }else{
                                     $q .= ", senha = '". gerarHash($senha1) . "'";
