@@ -86,13 +86,143 @@
         return $dados;
     }
 
-    function validaCampo(){
+    function validaCampo($frase){
     /*
         4) Criar validações no preenchimento dos campos de cadastro e/ou edição:
         4.1) Não permitir preenchimento de caracteres q possam causar problemas no banco de dados, ex, "aspas simples"
         4.2) Não permitir que haja mais de um caractere "espaço" consecutivo no meio de uma palavra ou que tenha "espaço" no início e final
     */
-    
+        // Removendo "espaços" no início e final de uma variável:
+        $frase = trim($frase, " ");
 
+        // Removendo "aspas simples":
+        $frase = str_replace("'", "", $frase);
+
+        // Substituindo os espaços consecutivos dentro de uma frase por um único espaço:
+        $tamanho = strlen($frase);
+
+        for($i=$tamanho; $i>=1; $i--){
+            $espaco = "          "; // 10 caracteres espaços
+            $espaco1 = substr($espaco, -$i, $i); // separa os i últimos espaços
+            $frase = str_replace($espaco1, " ", $frase);
+        }
+
+        return $frase;
     }
-?>
+
+    function verificaLetra($palavra){
+        $tamanho = strlen($palavra);
+        $maiuscula = strtoupper($palavra);
+        $letra = true;
+
+        for($i=0; $i<$tamanho; $i++){
+            if( !(65 <= ord($maiuscula[$i]) && ord($maiuscula[$i]) <= 90)){
+                $letra = false;
+                break;
+            }
+        }
+        return $letra;
+    }
+
+    function verificaNumero($numero){
+        $tamanho = strlen($numero);
+        $saida = true;
+
+        for($i=0; $i<$tamanho; $i++){
+            if( !(48 <= ord($numero[$i]) && ord($numero[$i]) <= 57)){
+                $saida = false;
+                break;
+            }
+        }
+        return $saida;
+    }
+
+    function validaSequenciaRepetitiva($sequencia){
+        // Se tiver um segmento repetitivo, retorna "true"
+        $tamanho = strlen($sequencia);
+        $flag = false;
+        
+        for($i=0; $i<$tamanho; $i++){
+            if($i+1 < $tamanho){
+                if( ord($sequencia[$i+1]) == ord($sequencia[$i]) ){
+                    $flag = true;
+                    break;
+                }
+            }
+        }
+        return $flag;
+    }
+
+    function validaSequenciaCrescenteDecrescente($sequencia){
+        $tamanho = strlen($sequencia);
+        $flag = false;
+
+        // Se o tamanho da seqência for inferior a 3, retorne false pois
+        // é necessário pelo menos 3 elementos p/ comparar entre si
+        if($tamanho < 3){
+            return false;
+        }else{
+            // Se tiver sequenciamento crescente ou decrescente de um segmento de valores numéricos da tab ASCII, é uma sequencia:
+            for($i=0; $i<$tamanho; $i++){
+                if($i+2 < $tamanho){
+                    if( (ord($sequencia[$i+2]) - ord($sequencia[$i+1])) == (ord($sequencia[$i+1] ) - ord($sequencia[$i])) ){
+                        $flag = true;
+                    }
+                }
+            }
+            return $flag;
+        }
+    }
+
+    function ValidaSenha($senha, $min, $max){
+        /*
+        A senha deve ter um tamanho mínimo e máximo
+        Sem caraceres tipo espaço ou aspas simples
+        Tem que ter letras e números
+        Não pode ter sequência de dígitos repetitivos ou sequenciais
+        */
+
+        $tamanho = strlen($senha);
+        if( !($min <= $tamanho && $tamanho <= $max) ){
+            return "Tamanho da senha inadequado, favor digitar outra!";
+        }else{
+            $senha = str_replace(" ", "", $senha);
+            if($tamanho <> strlen($senha)){
+                return "Sua senha contém caracteres proibidos tipo 'espaço', favor fazer outra!";
+            }else{
+                $senha = str_replace("'", "", $senha);
+                if($tamanho <> strlen($senha)){
+                    return "Sua senha contém caracteres proibidos tipo 'aspas', favor fazer outra!";
+                }else{
+                    
+                    $flag = true;
+
+                    // Fazer varredura num "loop for" caractere por caractere:
+                    for($i=0; $i<$tamanho; $i++){
+                        // Se não for número e simultaneamente tb não for letra, retorna "false":
+                        if( !( verificaLetra($senha[$i]) || verificaNumero($senha[$i]) ) ){
+                            $flag = false;
+                            break;
+                        }
+                    }
+                    // A sequencia tem letras e números:
+                    if($flag == true){
+                        // Se não tiver sequencia repetitiva:
+                        if(!validaSequenciaRepetitiva($senha)){
+                            // Para valores q haja pelo menos uma sequencia de 3 elementos:
+                            if( validaSequenciaCrescenteDecrescente($senha) ){
+                                return "Sua senha contém uma sequencia de valores, favor digitar outra que não seja uma sequencia!";
+                            }else{
+                                return "Senha OK";
+                            }
+                        }else{
+                            return "Sua senha contém uma sequência repetitiva, favor fazer outra!";
+                        }
+                    }else{
+                        return "Sua senha contém caracteres diferente de números ou letras, favor rever e digitar outra!";
+                    }
+                }
+            }
+        }
+    }
+?>  
