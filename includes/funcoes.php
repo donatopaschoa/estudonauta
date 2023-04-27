@@ -14,6 +14,10 @@
         return "<a href='index.php'><span class='material-icons'>arrow_back</span></a>";
     }
 
+    function voltar(){
+        return "<a href='javascript:history.go(-1)'> voltar</a>";
+    }
+
     function msg_sucesso($m){
         $resp = "<div class='sucesso'><span class='material-icons'>check_circle</span> $m</div>";
         return $resp;
@@ -86,7 +90,7 @@
         return $dados;
     }
 
-    function validaCampo($frase){
+    function ajustandoCampo($frase){
     /*
         4) Criar validações no preenchimento dos campos de cadastro e/ou edição:
         4.1) Não permitir preenchimento de caracteres q possam causar problemas no banco de dados, ex, "aspas simples"
@@ -98,6 +102,11 @@
         // Removendo "aspas simples":
         $frase = str_replace("'", "", $frase);
 
+        // Removendo "<", ">":
+        $frase = str_replace("<", " ", $frase);
+        $frase = str_replace(">", " ", $frase);
+
+
         // Substituindo os espaços consecutivos dentro de uma frase por um único espaço:
         $tamanho = strlen($frase);
 
@@ -106,8 +115,26 @@
             $espaco1 = substr($espaco, -$i, $i); // separa os i últimos espaços
             $frase = str_replace($espaco1, " ", $frase);
         }
-
         return $frase;
+    }
+
+    function validaNome($nome){
+        $nome1 = $nome;
+        $nome = ajustandoCampo($nome);
+        $tamanho1 = strlen($nome1);
+        $tamanho = strlen($nome);
+
+        if($tamanho1 <> $tamanho){
+            return "Você digitou no campo <strong>Nome</strong> com caracteres não permitidos<br>Favor ". voltar() ." e digitar entre 4 a 30 caracteres corretamenre!<br>";
+        }
+
+        if( $tamanho == 0 ){
+            return "Você <strong>não preencheu</strong> o campo <strong>Nome</strong><br> Favor ". voltar() ." e digitar seu nome corretamente<br>";
+        }elseif( !(4 <= $tamanho && $tamanho <=30) ){
+            return "Você digitou '$nome' no campo <strong>Nome</strong><br> Favor ". voltar() ." e digitar de 4 a 30 caracteres corretamente!<br>";
+        }else{
+            return true;
+        }
     }
 
     function verificaLetra($palavra){
@@ -137,6 +164,50 @@
         return $saida;
     }
 
+    function verificaCaracteresProibidos($caractere){
+        $tamanho = strlen($caractere);
+        $saida = true;
+
+        for($i=0; $i<$tamanho; $i++){ // Tab. ASCII: "'" (39), "<" (60), "=" (61), ">" (62)
+            if( (39 == ord($caractere[$i])) || ((60 <= ord($caractere[$i]) && ord($caractere[$i]) <= 62)) ) {
+                $saida = false;
+                break;
+            }
+        }
+        return $saida;
+    }
+
+    function validaUsuario($user){
+        $user1 = $user;
+        $user = ajustandoCampo($user);
+
+        $tamanho1 = strlen($user1);
+        $tamanho = strlen(($user));
+        $flag = true;
+
+        if($tamanho1 <> $tamanho){
+            return "Você digitou no campo <strong>Usuário</strong> com caracteres não permitidos<br> Favor ". voltar() ." e digitar entre 4 a 10 caracteres com letras e/ou números sem acentuações<br>";
+        }
+
+        if( !(4 <= $tamanho && $tamanho <= 10) ){
+            return "Você digitou '$user' no campo <strong>Usuário</strong><br>Favor ". voltar()." e digitar entre 4 a 10 caracteres com letras e/ou números (acentuações não são permitidas)<br>";
+        }else{
+            // Fazer varredura num "loop for" caractere por caractere:
+            for($i=0; $i<$tamanho; $i++){
+                // Se não for número e simultaneamente tb não for letra, retorna "false":
+                if( !( verificaLetra($user[$i]) || verificaNumero($user[$i]) ) ){
+                    $flag = false;
+                    break;
+                }
+            }
+            if($flag == false){
+                return "Você digitou '$user' no campo <strong>Usuário</strong><br>Favor ". voltar() ." e digitar letras e/ou números (acentuações não são permitidas)<br>";
+            }else{
+                return true;
+            }
+        }
+    }
+    
     function validaSequenciaRepetitiva($sequencia){
         // Se tiver um segmento repetitivo, retorna "true"
         $tamanho = strlen($sequencia);
@@ -174,7 +245,7 @@
         }
     }
 
-    function ValidaSenha($senha, $min, $max){
+    function validaSenha($senha, $min, $max){
         /*
         A senha deve ter um tamanho mínimo e máximo
         Sem caraceres tipo espaço ou aspas simples
@@ -184,15 +255,15 @@
 
         $tamanho = strlen($senha);
         if( !($min <= $tamanho && $tamanho <= $max) ){
-            return "Tamanho da senha inadequado, favor digitar outra!";
+            return "<strong>Senha inadequada</strong>, favor ". voltar() . " e digitar outra <strong>entre $min e $max dígitos!</strong><br>";
         }else{
             $senha = str_replace(" ", "", $senha);
             if($tamanho <> strlen($senha)){
-                return "Sua senha contém caracteres proibidos tipo 'espaço', favor fazer outra!";
+                return "Sua senha contém caracteres proibidos tipo 'espaço', favor ". voltar() . " e fazer outra!<br>";
             }else{
                 $senha = str_replace("'", "", $senha);
                 if($tamanho <> strlen($senha)){
-                    return "Sua senha contém caracteres proibidos tipo 'aspas', favor fazer outra!";
+                    return "Sua senha contém caracteres proibidos tipo 'aspas', favor ". voltar() . " e fazer outra!<br>";
                 }else{
                     
                     $flag = true;
@@ -211,15 +282,15 @@
                         if(!validaSequenciaRepetitiva($senha)){
                             // Para valores q haja pelo menos uma sequencia de 3 elementos:
                             if( validaSequenciaCrescenteDecrescente($senha) ){
-                                return "Sua senha contém uma sequencia de valores, favor digitar outra que não seja uma sequencia!";
+                                return "Sua senha contém uma <strong>sequencia de valores consecutivos</strong>, favor ". voltar() ." e digitar outra que não seja uma sequencia!<br>";
                             }else{
-                                return "Senha OK";
+                                return true;
                             }
                         }else{
-                            return "Sua senha contém uma sequência repetitiva, favor fazer outra!";
+                            return "Sua senha contém uma <strong>sequência de valores repetitivos</strong>, favor ". voltar() ." e digitar outra!<br>";
                         }
                     }else{
-                        return "Sua senha contém caracteres diferente de números ou letras, favor rever e digitar outra!";
+                        return "Sua senha contém caracteres <strong>diferente</strong> de números ou letras, favor". voltar() .", rever e digitar outra! (<strong>acentuações não são permitidas</strong>)<br>";
                     }
                 }
             }
