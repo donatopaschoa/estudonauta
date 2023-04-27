@@ -89,6 +89,9 @@ function is_editor(){
         }
     }
 }
+
+//echo gerarHash('mudar');
+//echo gerarHash('229568');
     /*
     echo gerarHash('teste');
     echo "<br>";
